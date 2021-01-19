@@ -1,10 +1,10 @@
 
 CC=g++
 CFLAGS=-Wall -Wextra
-EXEC=./tp1 # nome do executavel que sera gerado, nao troque
-TMPOUT=tp1.testresult
+EXEC=./tp01 # nome do executavel que sera gerado, nao troque
+TMPOUT=tp01.testresult
 
-$(EXEC): main.cpp foo.o
+$(EXEC): main.cpp
 	$(CC) $(CFLAGS) main.cpp -o $(EXEC)
 
 foo.o: include/foo.cpp
