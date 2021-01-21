@@ -1,11 +1,12 @@
-#include "headers/graph.hpp"
-#include <stack>
+#include "../headers/graph.hpp"
 #include <cstdlib>
-#include <iostream>
 #include <queue>
 
-GraphTree::GraphTree(std::vector<std::vector<int>> adjencyList){
+GraphTree::GraphTree(std::vector<std::vector<int>> adjencyList, int CD, int PV, int temperatureDecay){
     this->adjencyList = adjencyList;
+    this->CD = CD;
+    this->PV = PV;
+    this->temperatureDecay = temperatureDecay;
 }
 
 std::vector<std::vector<int>> GraphTree::getAdjencyList(){
@@ -50,20 +51,19 @@ std::vector<int> GraphTree::dfs(std::vector<bool> explored){
         std::queue<int> primaryQueue;
         std::queue<int> decendentQueue;
         
-        int currentExploration;
         for(auto it = adjencyList[i].begin(); it != adjencyList[i].end(); it++){
             primaryQueue.push(*it);
         }
 
-        for(deploymentRange; deploymentRange > 0; deploymentRange--){
+        for(int j = deploymentRange; j > 0; j--){
             while(!(primaryQueue.empty())){
                 int element = primaryQueue.front();
                 if(element != 0){
-                    reachedPV.push_back(element);
                     int elementIndex = element -1 + getCD();
                     primaryQueue.pop();
                     
                     if(!(explored[elementIndex])){
+                        reachedPV.push_back(element);
                         explored[elementIndex] = 1;
                         std::vector<int> edges = adjencyList[elementIndex];
                         for(auto it = edges.begin(); it != edges.end(); it++){

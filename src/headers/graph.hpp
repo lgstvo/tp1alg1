@@ -1,10 +1,7 @@
 #ifndef GRAPH
 #define GRAPH
-#include <iostream>
 #include <cstdlib>
-#include <string>
 #include <vector>
-#include <sstream>
 
 class GraphTree{
     private:
@@ -14,7 +11,7 @@ class GraphTree{
         int temperatureDecay;
 
     public:
-        GraphTree(std::vector<std::vector<int>>);
+        GraphTree(std::vector<std::vector<int>>, int, int, int);
 
         std::vector<std::vector<int>> getAdjencyList();
         int getCD();

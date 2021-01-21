@@ -4,14 +4,15 @@ CFLAGS=-Wall -Wextra -g
 EXEC=./tp01 # nome do executavel que sera gerado, nao troque
 TMPOUT=tp01.testresult
 
-$(EXEC): src/main.cpp
-	$(CC) $(CFLAGS) src/main.cpp -o $(EXEC)
+$(EXEC): src/main.cpp graph.o
+	$(CC) $(CFLAGS) src/main.cpp graph.o -o $(EXEC)
+	rm -rf graph.o
 
-foo.o: include/foo.cpp
-	$(CC) $(CFLAGS) -c include/foo.cpp -o foo.o
+graph.o: src/include/graph.cpp
+	$(CC) $(CFLAGS) -c src/include/graph.cpp -o graph.o
 
 test: $(EXEC)
 	@bash run_tests.sh $(EXEC) $(TMPOUT)
 
 clean:
-	rm -rf foo.o
+	rm -rf graph.o
