@@ -25,8 +25,9 @@ class GraphTree{
         void setPV(int);
         void setTemperatureDecay(int);
         void setAdjencyList(std::vector<std::vector<int>>);
-        
+
         std::vector<int> dfs();
+        std::vector<int> dfs(std::vector<bool>);
 
 };
 
