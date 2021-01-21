@@ -58,9 +58,9 @@ std::vector<int> GraphTree::dfs(std::vector<bool> explored){
         for(int j = deploymentRange; j > 0; j--){
             while(!(primaryQueue.empty())){
                 int element = primaryQueue.front();
+                primaryQueue.pop();
                 if(element != 0){
                     int elementIndex = element -1 + getCD();
-                    primaryQueue.pop();
                     
                     if(!(explored[elementIndex])){
                         reachedPV.push_back(element);
@@ -71,14 +71,10 @@ std::vector<int> GraphTree::dfs(std::vector<bool> explored){
                         }
                     }
                 }
-
             }
-            // swap queues
             primaryQueue.swap(decendentQueue);
         }
-
     }
-
     return reachedPV;
 }
 
