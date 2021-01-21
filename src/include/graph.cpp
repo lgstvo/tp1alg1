@@ -39,39 +39,6 @@ void GraphTree::setTemperatureDecay(int temperatureDecay){
 void GraphTree::setAdjencyList(std::vector<std::vector<int>> adjencyList){
     this->adjencyList = adjencyList;
 }
-/*
-std::vector<int> GraphTree::dfs(std::vector<bool> explored){
-    // Valores de indice dos PVs são os indices originais + nCD
-    std::vector<int> reachedPV;
-    int deploymentRange = 30/getTemperatureDecay();
-
-    for(int i = 0; i < getCD(); i++){
-        std::stack<int> notVisited;
-        std::vector<std::vector<int>> adjencyList = getAdjencyList();
-        int currentExploration;
-        for(auto it = adjencyList[i].begin(); it != adjencyList[i].end(); it++){
-            notVisited.push(*it);
-        }
-
-        while(!(notVisited.empty())){
-            currentExploration = notVisited.top();
-            notVisited.pop();
-
-            if(explored[currentExploration -1 + getCD()] == 0){
-                explored[currentExploration -1 + getCD()] = 1;
-                std::vector<int> edges = adjencyList[currentExploration -1 + getCD()];
-                for(auto it = edges.begin(); it != edges.end(); it++){
-                    notVisited.push(*it);
-                }
-            }
-        }
-
-        
-    }
-
-    return reachedPV;
-}
-*/
 
 std::vector<int> GraphTree::dfs(std::vector<bool> explored){
     // Valores de indice dos PVs são os indices originais + nCD

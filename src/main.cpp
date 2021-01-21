@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include "headers/graph.hpp"
 
 using namespace std;
 
@@ -28,6 +29,9 @@ int main(){
 
         graphTree.push_back(connections);
     }
+
+    GraphTree tree(graphTree);
+    vector<int> result = tree.dfs();
 
     return 0;
 }
