@@ -89,37 +89,52 @@ std::vector<int> GraphTree::bfs(){
 
 bool GraphTree::hasRecurrentPV(){
     std::vector<std::vector<int>> adjencyList = getAdjencyList();
+    std::vector<int> explored((int) getAdjencyList().size(), 0);
 
-    for(auto it = adjencyList.begin(); it != adjencyList.begin() + getCD(); it++){
-        std::vector<int> explored((int) getAdjencyList().size(), 0);
+    for(int i = 0; i < getCD(); i++){
         std::stack<int> possiblePaths;
         
-        for(auto jit = *it->begin(); jit != *it->end(); jit++){
-            possiblePaths.push(jit);
+        for(auto it = adjencyList[i].begin(); it != adjencyList[i].end(); it++){
+            possiblePaths.push(*it);
         }
+
+        int stackSize = possiblePaths.size();
 
         while(!possiblePaths.empty()){
             int element = possiblePaths.top();
             possiblePaths.pop();
-            int elementIndex = element - getCD() -1;
 
-            if(element != 0){
-                if(!explored[elementIndex]){
-                    explored[elementIndex]++;
-                    std::vector<int> edges = adjencyList[elementIndex];
-                    for(auto iterator = edges.begin(); iterator != edges.end(); iterator++){
-                        possiblePaths.push(*iterator);
+            std::vector<bool> endNodeCheck;
+            int elementIndex = element + getCD() -1;
+
+            if(explored[elementIndex] == 0){
+                explored[elementIndex] = 1;
+                
+                std::vector<int> edges = adjencyList[elementIndex];
+                for(auto it = edges.begin(); it != edges.end(); it++){
+                    if(*it != 0){
+                        possiblePaths.push(*it);
+                        endNodeCheck.push_back(true);
+                    }
+                    else{
+                        endNodeCheck.push_back(false);
                     }
                 }
-                else{
-                    return 1;
+            }
+            else if (explored[elementIndex] == 1 && element != 0){
+                return 1;
+            }
+
+            bool allFalses = true;
+            for(auto iterator = endNodeCheck.begin(); iterator != endNodeCheck.end(); iterator++){
+                if(*iterator) allFalses = false;
+            }
+            if(allFalses && ((int) possiblePaths.size()) < stackSize){
+                for(auto it = explored.begin(); it != explored.end(); it++){
+                    *it = 0;
                 }
             }
-            else{
-                std::vector<int> explored((int) getAdjencyList().size(), 0);
-            }
         }
-
     }
     return 0;
 }
