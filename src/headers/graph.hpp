@@ -23,8 +23,10 @@ class GraphTree{
         void setTemperatureDecay(int);
         void setAdjencyList(std::vector<std::vector<int>>);
 
-        std::vector<int> dfs();
-        std::vector<int> dfs(std::vector<bool>);
+        std::vector<int> bfs();
+        std::vector<int> bfs(std::vector<bool>);
+
+        bool hasRecurrentPV();
 
 };
 

@@ -32,8 +32,21 @@ int main(){
     }
 
     GraphTree tree(graphTree, numberOfCD, numberOfPV, temperatureDecay);
-    vector<int> result = tree.dfs();
+    vector<int> result = tree.bfs();
     sort(result.begin(), result.end());
+
+    cout << result.size() << endl;
+
+    if(!result.size()){
+        cout << '*' << endl;
+        cout << 0 << endl;
+    }
+    else{
+        for(auto it = result.begin(); it != result.end(); it++){
+            cout << *it << ' ';
+        }
+        cout << endl << tree.hasRecurrentPV();
+    }
 
     return 0;
 }
